@@ -1,0 +1,13 @@
+﻿# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/modules.xml
+/contentModel.xml
+/projectSettingsUpdater.xml
+/.idea.FacebookMarketing.iml
+# Datasource local storage ignored files
+/../../../../../../../:\Personal Projects\FacebookMarketing\FacebookMarketing\.idea\.idea.FacebookMarketing\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/

@@ -1,0 +1,50 @@
+You can choose SOLUTION 1 or SOLUTION 2 to deploy with docker
+
+************************************************* SOLUTION 1 *************************************************
+- Step 1:
+	Run command:
+	docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=Admin@123' -p 1433:1433 --name mssql -v fm-sqldata:/var/opt/mssql -d mcr.microsoft.com/mssql/server:2017-latest
+
+- Step 2:
+	Run command:
+	docker network inspect bridge
+	=> get ipadress (eg: 172.17.0.2)
+
+- Step 3:
+	Change connectionString to: 
+	"DefaultConnection": "Server=172.17.0.2; Database = FacebookMarketing_IIS; User ID=sa; Password=Admin@123;"
+
+- Step 4:
+	In the root folder project, run command
+	docker build -t facebookmarketing -f FM.API/Dockerfile .
+
+- Step 5:
+	Run command:
+	docker run -p 8082:80 --name fm-api facebookmarketing
+
+************************************************* SOLUTION 2 *************************************************
+- Step 1:
+	Run command:
+	docker network create fm-network
+
+- Step 2:
+	Run command:
+	docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=Admin@123' -p 1433:1433 --name mssql -h mssql --net=fm-network -v fm-sqldata:/var/opt/mssql -d mcr.microsoft.com/mssql/server:2017-latest
+
+- Step 3:
+	Change connectionString to: 
+	"DefaultConnection": "Server=mssql; Database = FacebookMarketing_IIS; User ID=sa; Password=Admin@123;"
+
+- Step 4:
+	In the root folder project, run command
+	docker build -t facebookmarketing -f FM.API/Dockerfile .
+
+- Step 5:
+	Run command:
+	docker run -p 8082:80 --name fm-api --net=fm-network facebookmarketing
+
+
+NOTE: You can change tag name:
+	Run command:
+	docker tag facebookmarketing tranquang229/fm:v1
+	docker run -p 8082:80 --name fm-api --net=fm-network tranquang229/fm:v1

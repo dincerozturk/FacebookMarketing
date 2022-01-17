@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FM.API</name>
+    </assembly>
+    <members>
+        <member name="M:FM.API.Helpers.AppHelpers.NumberHelper.FormatNumberThousandSeparator(System.Int32,System.String)">
+            <summary>
+            (19950000.0).ToString("N",new CultureInfo("en-US")) = 19,950,000.00
+            (19950000.0).ToString("N",new CultureInfo("is-IS")) = 19.950.000,00
+            </summary>
+            <param name="numberInput"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
